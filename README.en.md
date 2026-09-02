@@ -224,6 +224,12 @@ hue distance from the wallpaper-derived `accent`. Legacy three-color files
 remain supported. Missing, incomplete, or malformed required data falls back to
 the default blue palette.
 
+Candidate selection uses the shortest distance around the HSL hue circle. With
+hues represented from `0.0` to `1.0`, the distance is
+`min(abs(a - b), 1 - abs(a - b))`. This is a low-cost approximation that treats
+Matugen's `primary` as the wallpaper's representative color; it does not inspect
+screen pixels or include lightness and saturation in candidate selection.
+
 ```json
 {
   "accent": "#9acbfa",

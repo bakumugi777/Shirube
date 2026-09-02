@@ -87,10 +87,10 @@ Item {
     }
 
     function batteryStateText() {
-        return batteryStatus === "Charging" ? "充電中"
-             : batteryStatus === "Discharging" ? "使用中"
-             : batteryStatus === "Full" ? "満充電"
-             : batteryStatus === "Not charging" ? "給電中" : "状態不明";
+        return batteryStatus === "Charging" ? "Charging"
+             : batteryStatus === "Discharging" ? "On battery"
+             : batteryStatus === "Full" ? "Fully charged"
+             : batteryStatus === "Not charging" ? "Plugged in" : "Unknown";
     }
 
     function batteryTimeText() {
@@ -98,10 +98,10 @@ Item {
             return "";
         const hours = Math.floor(batteryTimeMinutes / 60);
         const minutes = batteryTimeMinutes % 60;
-        const value = (hours > 0 ? hours + "時間" : "")
-                    + (minutes > 0 ? minutes + "分" : "");
-        return batteryStatus === "Charging" ? "満充電まで " + value
-                                             : "残り約 " + value;
+        const value = (hours > 0 ? hours + "h " : "")
+                    + (minutes > 0 ? minutes + "m" : "");
+        return batteryStatus === "Charging" ? value + " until full"
+                                             : "About " + value + " remaining";
     }
 
     readonly property var daijiDigits: [
@@ -300,7 +300,7 @@ Item {
             id: memoryUsageLabel
             x: 34
             y: 91
-            text: "使用率  " + Math.round(root.memoryUsage * 100) + "%"
+            text: "Usage  " + Math.round(root.memoryUsage * 100) + "%"
             opacity: 0.96
             color: Config.brightTextColor
             style: Text.Outline
@@ -319,7 +319,7 @@ Item {
             y: 57
             width: parent.width - 48
             elide: Text.ElideRight
-            text: root.networkName.length > 0 ? root.networkName : "未接続"
+            text: root.networkName.length > 0 ? root.networkName : "Disconnected"
             opacity: 0.96
             color: Config.brightTextColor
             style: Text.Outline
@@ -330,7 +330,7 @@ Item {
             id: networkStateLabel
             x: 34
             y: 96
-            text: root.networkName.length > 0 ? "接続中" : "通信経路なし"
+            text: root.networkName.length > 0 ? "Connected" : "No active connection"
             opacity: 0.96
             color: Config.brightTextColor
             style: Text.Outline
@@ -347,7 +347,7 @@ Item {
             id: audioValue
             anchors.horizontalCenter: gauge.horizontalCenter
             y: 55
-            text: root.audioMuted ? "静" : Math.round(root.audioVolume * 100) + "%"
+            text: root.audioMuted ? "MUTED" : Math.round(root.audioVolume * 100) + "%"
             opacity: 0.96
             color: Config.brightTextColor
             style: Text.Outline
