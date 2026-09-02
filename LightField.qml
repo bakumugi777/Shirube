@@ -160,6 +160,21 @@ Item {
                 const audioMidLift = 0.108 * audioLight;
                 const audioOuterLift = 0.094 * audioLight;
                 const audioFarLift = 0.062 * audioLight;
+
+                // This contrast component uses the light field's own changing
+                // silhouette. It has no independent panel edge and reaches
+                // alpha zero at exactly the same moving right boundary.
+                const underlayAlpha = Config.lightUnderlayOpacity * root.reveal;
+                if (underlayAlpha > 0.001) {
+                    const underlay = ctx.createLinearGradient(0, 0, fieldWidth, 0);
+                    underlay.addColorStop(0.00, Qt.rgba(0, 0, 0, underlayAlpha));
+                    underlay.addColorStop(0.34, Qt.rgba(0, 0, 0, underlayAlpha * 0.58));
+                    underlay.addColorStop(0.68, Qt.rgba(0, 0, 0, underlayAlpha * 0.16));
+                    underlay.addColorStop(1.00, Qt.rgba(0, 0, 0, 0));
+                    ctx.fillStyle = underlay;
+                    ctx.fillRect(0, y, fieldWidth, stripHeight + 0.5);
+                }
+
                 const ambient = ctx.createLinearGradient(0, 0, fieldWidth, 0);
                 ambient.addColorStop(0.00, Qt.rgba(Config.lightNearColor.r, Config.lightNearColor.g, Config.lightNearColor.b, (0.34 + sourceLift + ambientPulse) * glow));
                 ambient.addColorStop(0.20, Qt.rgba(Config.lightInnerColor.r, Config.lightInnerColor.g, Config.lightInnerColor.b, (0.275 + 0.050 * influence + audioInnerLift + ambientPulse * 0.86) * glow));
@@ -207,6 +222,7 @@ Item {
             function onAudioReactionStrengthChanged() { field.requestPaint(); }
             function onLightWaveEnabledChanged() { field.requestPaint(); }
             function onLightWaveAmplitudeChanged() { field.requestPaint(); }
+            function onLightUnderlayOpacityChanged() { field.requestPaint(); }
         }
     }
 

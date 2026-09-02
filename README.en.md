@@ -165,6 +165,7 @@ input-transparent outside actual controls.
 | --- | --- |
 | `idleOpacity`, `subduedOpacity`, `hoverOpacity` | State opacity |
 | `hologramPanelOpacity` | Detail backing density |
+| `lightUnderlayOpacity` | Dark contrast layer that follows and fades with the light field |
 | `glowIntensity`, `textGlowIntensity` | Overall and text glow |
 | `paletteTransitionMs` | Animated palette transition time |
 | `ambientAnimationEnabled` | Master ambient-animation switch |

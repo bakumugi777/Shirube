@@ -232,6 +232,8 @@ QtObject {
     readonly property real hoverOpacity: read("appearance", "hoverOpacity", 1.0)
     readonly property real hologramPanelOpacity: Math.max(0, Math.min(0.3,
         read("appearance", "hologramPanelOpacity", 0.12)))
+    readonly property real lightUnderlayOpacity: Math.max(0, Math.min(0.3,
+        read("appearance", "lightUnderlayOpacity", 0.16)))
     readonly property real glowIntensity: Math.max(0.25, Math.min(2.0,
         read("appearance", "glowIntensity", 1.4)))
     readonly property real textGlowIntensity: Math.max(0, Math.min(2.0,

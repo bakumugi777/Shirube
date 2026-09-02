@@ -57,6 +57,7 @@
     "subduedOpacity": 0.50,
     "hoverOpacity": 1.0,
     "hologramPanelOpacity": 0.12,
+    "lightUnderlayOpacity": 0.16,
     "glowIntensity": 1.4,
     "textGlowIntensity": 1.0,
     "paletteTransitionMs": 650,
