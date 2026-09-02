@@ -111,8 +111,12 @@ QtObject {
         && validGeneratedColor(matugenData.surface)
     onMatugenAvailableChanged: console.info("Shirube palette:",
         matugenAvailable ? "matugen" : "default")
-    readonly property color generatedAccent: visibleAccent(
-        matugenData.accent !== undefined ? matugenData.accent : "#9acbfa")
+    // JSON values are JavaScript strings. Convert the accent to QML's color
+    // type before reading its HSL components; reading hsl* from the raw string
+    // yields NaN and can turn the generated palette transparent or black.
+    readonly property color rawGeneratedAccent:
+        matugenData.accent !== undefined ? matugenData.accent : "#9acbfa"
+    readonly property color generatedAccent: visibleAccent(rawGeneratedAccent)
     readonly property color generatedText:
         matugenData.text !== undefined ? matugenData.text : "#e0e2e8"
     readonly property color generatedSurface:

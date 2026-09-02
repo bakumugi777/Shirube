@@ -1,4 +1,4 @@
-# Shirube
+# 標 (Shirube)
 
 [日本語](README.md)
 
