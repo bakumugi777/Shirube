@@ -1,5 +1,7 @@
 {
   "accent": "{{colors.primary.default.hex}}",
+  "secondary": "{{colors.secondary.default.hex}}",
+  "tertiary": "{{colors.tertiary.default.hex}}",
   "text": "{{colors.on_background.default.hex}}",
   "surface": "{{colors.surface.default.hex}}"
 }

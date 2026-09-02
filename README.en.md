@@ -218,12 +218,17 @@ Values in `colors.overrides` take priority over default and Matugen palettes.
 ## Matugen
 
 Shirube watches `~/.config/shirube/matugen-colors.json`. Valid `accent`, `text`,
-and `surface` values activate the generated palette. Missing, incomplete, or
-malformed data falls back to the default blue palette.
+and `surface` values activate the generated palette. When `secondary` and
+`tertiary` are also present, Shirube uses whichever candidate has the greatest
+hue distance from the wallpaper-derived `accent`. Legacy three-color files
+remain supported. Missing, incomplete, or malformed required data falls back to
+the default blue palette.
 
 ```json
 {
   "accent": "#9acbfa",
+  "secondary": "#b8c4ff",
+  "tertiary": "#e0b6dc",
   "text": "#e0e2e8",
   "surface": "#142631"
 }

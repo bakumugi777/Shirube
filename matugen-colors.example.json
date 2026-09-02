@@ -1,5 +1,7 @@
 {
   "accent": "#9acbfa",
+  "secondary": "#b8c4ff",
+  "tertiary": "#e0b6dc",
   "text": "#e0e2e8",
   "surface": "#142631"
 }

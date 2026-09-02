@@ -73,6 +73,29 @@ QtObject {
                        Math.max(0.58, Math.min(0.78, color.hslLightness)), 1.0);
     }
 
+    function hueDistance(a, b) {
+        if (a.hslHue < 0 || b.hslHue < 0)
+            return 0;
+        const distance = Math.abs(a.hslHue - b.hslHue);
+        return Math.min(distance, 1 - distance);
+    }
+
+    function contrastingAccent(primary, secondary, tertiary,
+                                hasSecondary, hasTertiary) {
+        let selected = primary;
+        let selectedDistance = 0;
+        if (hasSecondary) {
+            selected = secondary;
+            selectedDistance = hueDistance(primary, secondary);
+        }
+        if (hasTertiary) {
+            const distance = hueDistance(primary, tertiary);
+            if (distance > selectedDistance)
+                selected = tertiary;
+        }
+        return selected;
+    }
+
     function paletteColor(key, defaultColor, generatedColor) {
         const colors = data.colors || {};
         const overrides = colors.overrides || {};
@@ -116,7 +139,17 @@ QtObject {
     // yields NaN and can turn the generated palette transparent or black.
     readonly property color rawGeneratedAccent:
         matugenData.accent !== undefined ? matugenData.accent : "#9acbfa"
-    readonly property color generatedAccent: visibleAccent(rawGeneratedAccent)
+    readonly property bool generatedSecondaryAvailable:
+        validGeneratedColor(matugenData.secondary)
+    readonly property bool generatedTertiaryAvailable:
+        validGeneratedColor(matugenData.tertiary)
+    readonly property color rawGeneratedSecondary: generatedSecondaryAvailable
+        ? matugenData.secondary : rawGeneratedAccent
+    readonly property color rawGeneratedTertiary: generatedTertiaryAvailable
+        ? matugenData.tertiary : rawGeneratedAccent
+    readonly property color generatedAccent: visibleAccent(contrastingAccent(
+        rawGeneratedAccent, rawGeneratedSecondary, rawGeneratedTertiary,
+        generatedSecondaryAvailable, generatedTertiaryAvailable))
     readonly property color generatedText:
         matugenData.text !== undefined ? matugenData.text : "#e0e2e8"
     readonly property color generatedSurface:
