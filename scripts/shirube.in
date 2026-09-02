@@ -1,0 +1,68 @@
+#!/bin/sh
+set -eu
+
+install_root="@INSTALL_ROOT@"
+config_root="${SHIRUBE_CONFIG_DIR:-${XDG_CONFIG_HOME:-$HOME/.config}/shirube}"
+runtime_root="${XDG_CACHE_HOME:-$HOME/.cache}/shirube/runtime"
+qml_root="${SHIRUBE_QML_DIR:-$runtime_root}"
+export SHIRUBE_CONFIG_FILE="${SHIRUBE_CONFIG_FILE:-$config_root/config.json}"
+export SHIRUBE_MATUGEN_FILE="${SHIRUBE_MATUGEN_FILE:-$config_root/matugen-colors.json}"
+
+install -d "$config_root/matugen" "$runtime_root/helpers"
+if [ ! -e "$config_root/config.json" ]; then
+    install -m644 "$install_root/config.json" "$config_root/config.json"
+fi
+if [ ! -e "$config_root/matugen/shirube-colors.json" ]; then
+    install -m644 "$install_root/matugen/templates/shirube-colors.json" \
+        "$config_root/matugen/shirube-colors.json"
+fi
+for source in "$install_root"/*.qml; do
+    ln -sfn "$source" "$runtime_root/$(basename "$source")"
+done
+ln -sfn "$install_root/helpers/shirube-audio-rms" "$runtime_root/helpers/shirube-audio-rms"
+
+normalize_module() {
+    case "${1:-}" in
+        cpu) printf '%s\n' cpu ;;
+        memory|mem) printf '%s\n' memory ;;
+        audio|volume|sound) printf '%s\n' audio ;;
+        network|net) printf '%s\n' network ;;
+        battery|bat) printf '%s\n' battery ;;
+        calendar|clock|date) printf '%s\n' calendar ;;
+        *) return 1 ;;
+    esac
+}
+
+usage() {
+    printf '%s\n' \
+        "Usage: shirube [start|quit|open MODULE|toggle MODULE|close]" \
+        "Modules: cpu, memory, audio, network, battery, calendar"
+}
+
+case "${1:-start}" in
+    start)
+        exec qs -p "$qml_root"
+        ;;
+    open|toggle)
+        if [ "$#" -ne 2 ] || ! module=$(normalize_module "$2"); then
+            usage >&2
+            exit 2
+        fi
+        exec qs -p "$qml_root" ipc call shirube "$1" "$module"
+        ;;
+    close)
+        [ "$#" -eq 1 ] || { usage >&2; exit 2; }
+        exec qs -p "$qml_root" ipc call shirube close
+        ;;
+    quit|stop)
+        [ "$#" -eq 1 ] || { usage >&2; exit 2; }
+        exec qs -p "$qml_root" kill
+        ;;
+    help|-h|--help)
+        usage
+        ;;
+    *)
+        usage >&2
+        exit 2
+        ;;
+esac

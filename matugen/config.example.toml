@@ -1,0 +1,6 @@
+[config]
+wallpaper_set = false
+
+[templates.shirube]
+input_path = "/absolute/path/to/shirube/matugen/templates/shirube-colors.json"
+output_path = "/absolute/path/to/shirube/matugen-colors.json"

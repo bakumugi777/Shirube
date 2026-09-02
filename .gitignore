@@ -1,0 +1,42 @@
+# Nix build outputs and development environments
+/result
+/result-*
+/.direnv/
+/build/
+/.cache/
+
+# Locally compiled helper
+/helpers/shirube-audio-rms
+*.o
+*.d
+/compile_commands.json
+
+# Runtime-generated local files
+/matugen-colors.json
+/.qmlls.ini
+/*.qmlc
+/*.jsc
+/.qmlcache/
+
+# Crash dumps
+/core
+/core.*
+*.profraw
+*.trace
+
+# Development-only reference material
+/sankou/
+/標（Shirube） 要件・仕様書 v0.1.md
+
+# Editor and operating-system files
+/.idea/
+/.vscode/
+*~
+*.swp
+*.swo
+.DS_Store
+
+# Local environment overrides and secrets
+/.env
+/.env.*
+!/.env.example

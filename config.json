@@ -1,0 +1,94 @@
+{
+  "font": {
+    "family": "Makinas",
+    "fallbacks": ["Noto Sans CJK JP", "sans-serif"],
+    "moduleSize": 14,
+    "workspaceSize": 14,
+    "clockSize": 16,
+    "weight": 500,
+    "letterSpacing": 1.5
+  },
+  "colors": {
+    "accent": "#9acbfa",
+    "text": "#e0e2e8",
+    "subduedText": "#92a6b7",
+    "brightText": "#ffffff",
+    "caption": "#91b3bd",
+    "workspaceActive": "#edf8fa",
+    "workspaceIdle": "#aac4ca",
+    "clock": "#d4e5e8",
+    "clockSeparator": "#b8d0d5",
+    "ringTrack": "#343f5962",
+    "ringTrackActive": "#6b789fab",
+    "ringInner": "#304b7182",
+    "lightNear": "#78bfff",
+    "lightInner": "#62afff",
+    "lightMid": "#4d9ce8",
+    "lightOuter": "#3c87d2",
+    "lightFar": "#2d72b8",
+    "lightSource": "#add8ff",
+    "hologramPanel": "#142631",
+    "overrides": {}
+  },
+  "layout": {
+    "exclusiveZoneWidth": 64,
+    "compactSurfaceWidth": 90,
+    "lightWidth": 90,
+    "expandedSurfaceWidth": 380,
+    "moduleAxis": 26
+  },
+  "middle": {
+    "spacing": 6,
+    "actions": [
+      {
+        "symbol": "☯",
+        "name": "Launcher",
+        "command": ["wofi", "--show", "drun"]
+      },
+      {
+        "symbol": "終",
+        "name": "Session",
+        "command": ["sh", "-c", "if command -v wlogout >/dev/null 2>&1; then exec wlogout; fi"]
+      }
+    ]
+  },
+  "appearance": {
+    "idleOpacity": 1.0,
+    "subduedOpacity": 0.50,
+    "hoverOpacity": 1.0,
+    "hologramPanelOpacity": 0.12,
+    "glowIntensity": 1.4,
+    "textGlowIntensity": 1.0,
+    "paletteTransitionMs": 650,
+    "ambientAnimationEnabled": true,
+    "floatingEnabled": true,
+    "floatingAmplitude": 1.1,
+    "floatingPeriodMs": 7200,
+    "lightWaveEnabled": true,
+    "lightWaveAmplitude": 8.0,
+    "lightWavePeriodMs": 3000,
+    "lightWaveFps": 10,
+    "lightFieldStripHeight": 5,
+    "audioReactionEnabled": true,
+    "audioReactionStrength": 0.90,
+    "audioReactionSmoothingMs": 360,
+    "audioReactionAttackMs": 90,
+    "audioReactionReleaseMs": 380,
+    "audioReactionBrightness": 1.35
+  },
+  "animation": {
+    "enabled": true,
+    "interactionMs": 280,
+    "startupLightMs": 720,
+    "startupUiDelayMs": 260,
+    "startupUiMs": 520
+  },
+  "updates": {
+    "systemMs": 2000,
+    "desktopMs": 3000,
+    "audioMs": 3000,
+    "networkMs": 6000,
+    "batteryMs": 15000,
+    "workspaceFallbackMs": 2000
+  }
+}
