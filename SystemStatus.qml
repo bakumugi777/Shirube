@@ -101,9 +101,17 @@ QtObject {
                 memory[match[1]] = Number(match[2]);
         }
         if (memory.MemTotal > 0) {
-            memoryUsage = 1 - memory.MemAvailable / memory.MemTotal;
+            // Match htop's Linux memory meter. Reclaimable cache and buffers
+            // are not counted as application-used memory.
+            const cache = Math.max(0, (memory.Cached || 0)
+                                      + (memory.SReclaimable || 0)
+                                      - (memory.Shmem || 0));
+            const used = Math.max(0, Math.min(memory.MemTotal,
+                memory.MemTotal - (memory.MemFree || 0)
+                                - (memory.Buffers || 0) - cache));
+            memoryUsage = used / memory.MemTotal;
             memoryTotalGiB = memory.MemTotal / 1048576;
-            memoryUsedGiB = (memory.MemTotal - memory.MemAvailable) / 1048576;
+            memoryUsedGiB = used / 1048576;
         }
     }
 

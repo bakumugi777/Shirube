@@ -58,6 +58,9 @@ CPU and memory data come from `/proc`; battery data comes from
 When Makinas is unavailable, Shirube tries `Noto Sans CJK JP` and then the
 system `sans-serif`.
 
+Memory usage follows htop's Linux memory meter: free memory, buffers, cache, and
+reclaimable slab are excluded from application-used memory.
+
 ## Installation
 
 ### NixOS (recommended)

@@ -110,6 +110,8 @@ nix flake check
 
 状態取得には `/proc`、`/sys/class/power_supply`、`niri msg`、`wpctl`、`nmcli` を使用します。コマンドが存在しない、
 または対象サービスが利用できない場合もシェル自体は起動し、該当項目は未接続状態として表示します。
+メモリ使用量はhtopのLinuxメモリメーターに合わせ、free、buffers、cache、回収可能slabを
+使用中から除外します。
 
 ### 外部操作（IPC）
 
