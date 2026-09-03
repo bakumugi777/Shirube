@@ -168,7 +168,7 @@ input-transparent outside actual controls.
 | --- | --- |
 | `idleOpacity`, `subduedOpacity`, `hoverOpacity` | State opacity |
 | `hologramPanelOpacity` | Detail backing density |
-| `lightUnderlayOpacity` | Dark contrast layer that follows and fades with the light field |
+| `lightUnderlayOpacity` | Dark contrast layer opacity (`0.0`–`1.0`) that follows and fades with the light field |
 | `glowIntensity`, `textGlowIntensity` | Overall and text glow |
 | `ringTransitionMs` | Status-ring value transition duration |
 | `audioGaugeTransitionMs` | Fast-starting volume-gauge transition duration |

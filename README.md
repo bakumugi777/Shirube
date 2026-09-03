@@ -240,7 +240,7 @@ sans-serifへ順にフォールバックするため、Makinasは必須依存で
 | --- | ---: | --- |
 | `appearance.idleOpacity` / `subduedOpacity` / `hoverOpacity` | `1.0` / `0.50` / `1.0` | 状態別不透明度 |
 | `appearance.hologramPanelOpacity` | `0.12` | 詳細背後の面の濃さ |
-| `appearance.lightUnderlayOpacity` | `0.16` | 光場と同じ形で右へ消える黒い対比層の濃さ |
+| `appearance.lightUnderlayOpacity` | `0.16` | 光場と同じ形で右へ消える黒い対比層の濃さ（`0.0`〜`1.0`） |
 | `appearance.glowIntensity` / `textGlowIntensity` | `1.4` / `1.0` | 全体・文字の発光量 |
 | `appearance.ringTransitionMs` | `520` | 発光リングが新しい値へ移る補間時間 |
 | `appearance.audioGaugeTransitionMs` | `160` | 音量ゲージの追従時間。初速の速い補間を使用 |
