@@ -534,6 +534,8 @@ Scope {
                                   - holographicUiLayer.batterySpacing - height / 2)
                     symbol: status.audioMuted ? "静" : "音"
                     value: status.audioVolume
+                    valueTransitionMs: Config.audioGaugeTransitionMs
+                    valueTransitionEasing: Easing.OutCubic
                     accessibleName: status.audioMuted ? "Audio muted" : "Audio"
                     subdued: status.audioMuted
                     expanded: panel.expandedModule === "audio"

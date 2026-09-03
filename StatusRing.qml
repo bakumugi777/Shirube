@@ -11,6 +11,8 @@ Item {
     property real expansionGlow: expanded ? 1.0 : 0.0
     property bool wheelEnabled: false
     property real displayedValue: value
+    property int valueTransitionMs: Config.ringTransitionMs
+    property int valueTransitionEasing: Easing.InOutSine
     readonly property real ringDiameter: 46
     readonly property bool hovered: interaction.containsMouse
     signal activated()
@@ -18,8 +20,8 @@ Item {
 
     Behavior on displayedValue {
         NumberAnimation {
-            duration: Config.ringTransitionMs
-            easing.type: Easing.InOutSine
+            duration: root.valueTransitionMs
+            easing.type: root.valueTransitionEasing
         }
     }
 
