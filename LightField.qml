@@ -52,6 +52,10 @@ Item {
         onPaint: {
             const ctx = getContext("2d");
             ctx.reset();
+            // Config changes can remove a previously drawn layer. Clear the
+            // backing store explicitly so disabled underlay pixels cannot
+            // survive into the next frame.
+            ctx.clearRect(0, 0, width, height);
 
             // Draw one continuous field. Expansion changes the horizontal
             // decay distance of this same edge light at each y coordinate;
