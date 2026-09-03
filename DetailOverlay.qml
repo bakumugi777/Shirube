@@ -12,6 +12,7 @@ Item {
     property real memoryUsedGiB: 0
     property real memoryTotalGiB: 0
     property real audioVolume: 0
+    property real displayedAudioVolume: audioVolume
     property bool audioMuted: false
     property string networkName: ""
     property real batteryLevel: 0
@@ -22,6 +23,13 @@ Item {
     readonly property bool hovered: overlayHover.hovered
     signal audioVolumeRequested(real value)
     signal audioMuteRequested()
+
+    Behavior on displayedAudioVolume {
+        NumberAnimation {
+            duration: Config.audioGaugeTransitionMs
+            easing.type: Easing.OutCubic
+        }
+    }
 
     function heightForModule(name) {
         return name === "cpu" ? Math.max(140, 89 + cpuCoreRows * 16)
@@ -380,7 +388,7 @@ Item {
                     const w = width;
                     const h = height;
                     const center = w / 2;
-                    const fillHeight = Math.max(2, h * root.audioVolume);
+                    const fillHeight = Math.max(2, h * root.displayedAudioVolume);
                     const top = h - fillHeight;
                     ctx.reset();
 
@@ -442,7 +450,7 @@ Item {
 
                 Connections {
                     target: root
-                    function onAudioVolumeChanged() { volumeGlow.requestPaint(); }
+                    function onDisplayedAudioVolumeChanged() { volumeGlow.requestPaint(); }
                 }
                 Connections {
                     target: Config
@@ -466,7 +474,7 @@ Item {
                     horizontalCenter: parent.horizontalCenter
                 }
                 width: 2
-                height: Math.max(2, parent.height * root.audioVolume)
+                height: Math.max(2, parent.height * root.displayedAudioVolume)
                 radius: 1
                 color: Config.brightTextColor
             }

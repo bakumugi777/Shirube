@@ -61,6 +61,7 @@
     "glowIntensity": 1.4,
     "textGlowIntensity": 1.0,
     "ringTransitionMs": 520,
+    "audioGaugeTransitionMs": 160,
     "paletteTransitionMs": 650,
     "ambientAnimationEnabled": true,
     "floatingEnabled": true,

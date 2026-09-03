@@ -241,6 +241,9 @@ QtObject {
     readonly property int ringTransitionMs: animationsEnabled
         ? Math.max(0, Math.min(2000,
             read("appearance", "ringTransitionMs", 520))) : 0
+    readonly property int audioGaugeTransitionMs: animationsEnabled
+        ? Math.max(0, Math.min(600,
+            read("appearance", "audioGaugeTransitionMs", 160))) : 0
     readonly property bool floatingEnabled:
         read("appearance", "floatingEnabled", true)
     readonly property bool ambientAnimationEnabled:
