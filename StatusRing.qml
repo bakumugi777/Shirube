@@ -10,10 +10,18 @@ Item {
     property bool expanded: false
     property real expansionGlow: expanded ? 1.0 : 0.0
     property bool wheelEnabled: false
+    property real displayedValue: value
     readonly property real ringDiameter: 46
     readonly property bool hovered: interaction.containsMouse
     signal activated()
     signal wheelAdjusted(real steps)
+
+    Behavior on displayedValue {
+        NumberAnimation {
+            duration: Config.ringTransitionMs
+            easing.type: Easing.InOutSine
+        }
+    }
 
     implicitWidth: ringDiameter
     implicitHeight: caption.length > 0 ? ringDiameter + 11 : ringDiameter
@@ -65,7 +73,7 @@ Item {
                 ctx.arc(center, ringCenterY, radius, segmentStart, segmentEnd);
                 ctx.stroke();
             }
-            if (root.value > 0.002) {
+            if (root.displayedValue > 0.002) {
                 // Diffuse light around the progress stroke. Multiple soft
                 // orbits read as emitted light without forming a solid donut.
                 ctx.lineCap = "round";
@@ -77,7 +85,7 @@ Item {
                                           * Config.glowIntensity);
                 ctx.beginPath();
                 ctx.arc(center, ringCenterY, radius, start,
-                        start + span * Math.max(0, Math.min(1, root.value)));
+                        start + span * Math.max(0, Math.min(1, root.displayedValue)));
                 ctx.stroke();
 
                 ctx.lineWidth = 1.65;
@@ -88,7 +96,7 @@ Item {
                                 : Config.accentColor;
                 ctx.beginPath();
                 ctx.arc(center, ringCenterY, radius, start,
-                        start + span * Math.max(0, Math.min(1, root.value)));
+                        start + span * Math.max(0, Math.min(1, root.displayedValue)));
                 ctx.stroke();
             }
 
@@ -103,7 +111,7 @@ Item {
 
         Connections {
             target: root
-            function onValueChanged() { canvas.requestPaint(); }
+            function onDisplayedValueChanged() { canvas.requestPaint(); }
             function onSubduedChanged() { canvas.requestPaint(); }
             function onHoveredChanged() { canvas.requestPaint(); }
             function onExpandedChanged() { canvas.requestPaint(); }

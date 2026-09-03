@@ -238,6 +238,9 @@ QtObject {
         read("appearance", "glowIntensity", 1.4)))
     readonly property real textGlowIntensity: Math.max(0, Math.min(2.0,
         read("appearance", "textGlowIntensity", 1.0)))
+    readonly property int ringTransitionMs: animationsEnabled
+        ? Math.max(0, Math.min(2000,
+            read("appearance", "ringTransitionMs", 520))) : 0
     readonly property bool floatingEnabled:
         read("appearance", "floatingEnabled", true)
     readonly property bool ambientAnimationEnabled:

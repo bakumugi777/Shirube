@@ -170,6 +170,7 @@ input-transparent outside actual controls.
 | `hologramPanelOpacity` | Detail backing density |
 | `lightUnderlayOpacity` | Dark contrast layer that follows and fades with the light field |
 | `glowIntensity`, `textGlowIntensity` | Overall and text glow |
+| `ringTransitionMs` | Status-ring value transition duration |
 | `paletteTransitionMs` | Animated palette transition time |
 | `ambientAnimationEnabled` | Master ambient-animation switch |
 | `floatingEnabled`, `floatingAmplitude`, `floatingPeriodMs` | Module drift |

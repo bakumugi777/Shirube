@@ -242,6 +242,7 @@ sans-serifへ順にフォールバックするため、Makinasは必須依存で
 | `appearance.hologramPanelOpacity` | `0.12` | 詳細背後の面の濃さ |
 | `appearance.lightUnderlayOpacity` | `0.16` | 光場と同じ形で右へ消える黒い対比層の濃さ |
 | `appearance.glowIntensity` / `textGlowIntensity` | `1.4` / `1.0` | 全体・文字の発光量 |
+| `appearance.ringTransitionMs` | `520` | 発光リングが新しい値へ移る補間時間 |
 | `appearance.paletteTransitionMs` | `650` | 配色補間時間 |
 | `appearance.ambientAnimationEnabled` | `true` | 常時演出の一括切り替え |
 | `appearance.floatingEnabled` / `floatingAmplitude` / `floatingPeriodMs` | `true` / `1.1` / `7200` | 浮遊の有効化・量・周期 |

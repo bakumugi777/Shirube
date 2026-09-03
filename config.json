@@ -60,6 +60,7 @@
     "lightUnderlayOpacity": 0.16,
     "glowIntensity": 1.4,
     "textGlowIntensity": 1.0,
+    "ringTransitionMs": 520,
     "paletteTransitionMs": 650,
     "ambientAnimationEnabled": true,
     "floatingEnabled": true,
