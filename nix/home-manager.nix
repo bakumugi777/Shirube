@@ -10,6 +10,12 @@ let
   shared = cfg.sharedShell;
   sharedSupport = import ./shared-shell.nix { inherit cfg lib pkgs; };
   sharedRoot = "${config.xdg.configHome}/quickshell/shirube-kaname";
+  managedConfigSource = lib.attrByPath [
+    "xdg"
+    "configFile"
+    "shirube/config.json"
+    "source"
+  ] null config;
 in
 {
   options.programs.shirube = {
@@ -43,6 +49,10 @@ in
         Description = "Shirube light-field interface";
         PartOf = [ "graphical-session.target" ];
         After = [ "graphical-session.target" ];
+        # Home Manager replaces declarative config files with a new store
+        # symlink during activation. File watchers cannot reliably observe that
+        # replacement, so restart the shell whenever its managed config changes.
+        X-Restart-Triggers = [ cfg.package ] ++ lib.optional (managedConfigSource != null) managedConfigSource;
       };
       Service = {
         ExecStart =
